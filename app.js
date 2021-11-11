@@ -14,14 +14,6 @@ app.use(
 );
 app.use(fileUpload());
 app.use(cookieParser());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  next();
-});
 
 //Router Imports
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
