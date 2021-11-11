@@ -16,7 +16,7 @@ app.use(
 app.use(fileUpload());
 app.use(cookieParser());
 const corsOptions = {
-  origin: "*",
+  methods: "GET,PUT,POST,DELETE"
 };
 app.use(cors(corsOptions));
 app.use(function (req, res, next) {
