@@ -19,6 +19,10 @@ const corsOptions = {
   origin: "*",
 };
 app.use(cors(corsOptions));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 //Router Imports
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
