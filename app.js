@@ -15,7 +15,12 @@ app.use(
 );
 app.use(fileUpload());
 app.use(cookieParser());
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 //Router Imports
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
