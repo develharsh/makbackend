@@ -26,7 +26,7 @@ app.use("/api/v1/partner", require("./routes/partnerRoute.js"));
 
 require("./utils/connectDB");
 
-const FINAL_PORT = process.env.PORT || 3100;
+const FINAL_PORT = process.env.PORT || 5000;
 app.listen(FINAL_PORT, () => {
   console.log(`Server running ${FINAL_PORT}`);
 });
