@@ -17,8 +17,6 @@ app.use(fileUpload());
 app.use(cookieParser());
 const corsOptions = {
   origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 
