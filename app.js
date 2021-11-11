@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
+const cors = require("cors");
 require("dotenv").config({ path: "config/.env" });
 //const cloudinary = require("cloudinary");
 //const path = require("path");
@@ -14,6 +15,7 @@ app.use(
 );
 app.use(fileUpload());
 app.use(cookieParser());
+app.use(cors({ origin: "*", methods: "Get, Post, Put, Delete" }));
 
 //Router Imports
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
