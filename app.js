@@ -15,7 +15,7 @@ app.use(
 );
 app.use(fileUpload());
 app.use(cookieParser());
-app.use(cors({ origin: "*", methods: "Get, Post, Put, Delete" }));
+app.use(cors({ origin: "*" }));
 
 //Router Imports
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
