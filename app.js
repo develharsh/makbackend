@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, Content-Type, Accept, Authorization"
+    "Origin, Content-Type, X-Auth-Token"
   );
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
