@@ -17,7 +17,6 @@ export const loadUser = () => async (dispatch) => {
   const config = {
     method: "GET",
     headers: { Authorization: cookie.load("token") },
-    mode: "no-cors",
   };
   await fetch(`${API_URL}/api/v1/common/profile`, config)
     .then((response) => response.json())
