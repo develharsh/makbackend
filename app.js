@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Origin, Content-Type, Accept, Authorization"
   );
-  res.header("Access-Control-Allow-Origin", "https://myui-kappa.vercel.app");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, HEAD, OPTIONS"
