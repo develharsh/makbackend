@@ -43,5 +43,5 @@ require("./utils/connectDB");
 
 const FINAL_PORT = process.env.PORT || 5000;
 app.listen(FINAL_PORT, () => {
-  console.log(`Server running ${FINAL_PORT}`);
+  //console.log(`Server running ${FINAL_PORT}`);
 });
