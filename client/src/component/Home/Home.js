@@ -12,7 +12,7 @@ const Home = () => {
         <Loader />
       ) : (
         <Fragment>
-          <h1>Home</h1>
+          <h1>Homme</h1>
         </Fragment>
       )}
     </Fragment>

@@ -15,6 +15,12 @@ app.use(
 app.use(fileUpload());
 app.use(cookieParser());
 
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   next();
+// });
+
 //Router Imports
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
 app.use("/api/v1/client", require("./routes/clientRoute.js"));
