@@ -1,5 +1,4 @@
 import cookie from "react-cookies";
-import { API_URL } from "../config/keys";
 import {
   CLIENT_LOGIN_REQUEST,
   CLIENT_LOGIN_SUCCESS,
@@ -22,7 +21,7 @@ export const signup = (name, email, phone, password) => async (dispatch) => {
     body: JSON.stringify({ name, email, phone, password }),
   };
 
-  await fetch(`${API_URL}/api/v1/client/signup`, config)
+  await fetch(`/api/v1/client/signup`, config)
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -59,7 +58,7 @@ export const login = (ID, password) => async (dispatch) => {
     body: JSON.stringify({ ID, password }),
   };
 
-  await fetch(`${API_URL}/api/v1/client/login`, config)
+  await fetch(`/api/v1/client/login`, config)
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {

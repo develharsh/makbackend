@@ -1,5 +1,4 @@
 import cookie from "react-cookies";
-import { API_URL } from "../config/keys";
 import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
@@ -18,7 +17,7 @@ export const loadUser = () => async (dispatch) => {
     method: "GET",
   };
   await fetch(
-    `${API_URL}/api/v1/common/profile?token=${cookie.load("token")}`,
+    `/api/v1/common/profile?token=${cookie.load("token")}`,
     config
   )
     .then((response) => response.json())
@@ -48,7 +47,7 @@ export const logOut = () => async (dispatch) => {
     method: "GET",
   };
   await fetch(
-    `${API_URL}/api/v1/common/logout?token=${cookie.load("token")}`,
+    `/api/v1/common/logout?token=${cookie.load("token")}`,
     config
   )
     .then((response) => response.json())

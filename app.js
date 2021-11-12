@@ -5,6 +5,7 @@ const fileUpload = require("express-fileupload");
 require("dotenv").config({ path: "config/.env" });
 //const cloudinary = require("cloudinary");
 const path = require("path");
+
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -13,12 +14,6 @@ app.use(
 );
 app.use(fileUpload());
 app.use(cookieParser());
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Headers", "Content-Type");
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//   next();
-// });
 
 //Router Imports
 app.use("/t", function (req, res, next) {
