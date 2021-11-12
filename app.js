@@ -3,6 +3,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 require("dotenv").config({ path: "config/.env" });
+const cors = require("cors");
 //const cloudinary = require("cloudinary");
 const path = require("path");
 
@@ -15,6 +16,7 @@ app.use(
 app.use(fileUpload());
 app.use(cookieParser());
 
+app.use(cors());
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Headers", "Content-Type");
 //   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -28,11 +30,11 @@ app.use("/api/v1/common", require("./routes/commonRoute.js"));
 app.use("/api/v1/service", require("./routes/serviceRoute.js"));
 app.use("/api/v1/partner", require("./routes/partnerRoute.js"));
 
-//Frontend
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
-});
+// //Frontend
+// app.use(express.static(path.join(__dirname, "./client/build")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
+// });
 
 require("./utils/connectDB");
 
