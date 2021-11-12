@@ -5,6 +5,7 @@ const fileUpload = require("express-fileupload");
 require("dotenv").config({ path: "config/.env" });
 //const cloudinary = require("cloudinary");
 const path = require("path");
+const proxy = require("express-http-proxy");
 
 app.use(express.json());
 app.use(
@@ -14,6 +15,7 @@ app.use(
 );
 app.use(fileUpload());
 app.use(cookieParser());
+app.use("/api", proxy("https://makbackend.herokuapp.com"));
 
 //Router Imports
 app.use("/t", function (req, res, next) {
