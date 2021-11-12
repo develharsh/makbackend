@@ -5,6 +5,7 @@ const fileUpload = require("express-fileupload");
 require("dotenv").config({ path: "config/.env" });
 //const cloudinary = require("cloudinary");
 const path = require("path");
+const cors = require("cors");
 
 app.use(express.json());
 app.use(
@@ -14,28 +15,16 @@ app.use(
 );
 app.use(fileUpload());
 app.use(cookieParser());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  next();
-});
 
 //Router Imports
 app.use("/t", function (req, res, next) {
   res.status(200).json({ status: "200 OK Backend is here." });
 });
-app.use("/api/v1/team", require("./routes/teamRoute.js"));
-app.use("/api/v1/client", require("./routes/clientRoute.js"));
-app.use("/api/v1/common", require("./routes/commonRoute.js"));
-app.use("/api/v1/service", require("./routes/serviceRoute.js"));
-app.use("/api/v1/partner", require("./routes/partnerRoute.js"));
+app.use("/api/v1/team", cors(), require("./routes/teamRoute.js"));
+app.use("/api/v1/client", cors(), require("./routes/clientRoute.js"));
+app.use("/api/v1/common", cors(), require("./routes/commonRoute.js"));
+app.use("/api/v1/service", cors(), require("./routes/serviceRoute.js"));
+app.use("/api/v1/partner", cors(), require("./routes/partnerRoute.js"));
 
 // //Frontend
 // app.use(express.static(path.join(__dirname, "./client/build")));
