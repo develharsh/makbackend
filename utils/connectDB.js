@@ -6,10 +6,10 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     })
     .then((data) => {
-      //console.log("Mongo Connected");
+      console.log("Mongo Connected");
     })
     .catch((err) => {
-      //console.log("MONGO ERROR");
+      console.log("MONGO ERROR");
     });
 };
 connectDB();

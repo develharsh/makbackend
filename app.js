@@ -16,15 +16,12 @@ app.use(fileUpload());
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, Content-Type, X-Auth-Token"
-  );
+  res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, HEAD, OPTIONS"
-  );
+  // res.header(
+  //   "Access-Control-Allow-Methods",
+  //   "GET, POST, PUT, DELETE, HEAD, OPTIONS"
+  // );
   next();
 });
 
@@ -46,5 +43,5 @@ require("./utils/connectDB");
 
 const FINAL_PORT = process.env.PORT || 5000;
 app.listen(FINAL_PORT, () => {
-  //console.log(`Server running ${FINAL_PORT}`);
+  console.log(`Server running ${FINAL_PORT}`);
 });

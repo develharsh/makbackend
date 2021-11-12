@@ -5,7 +5,7 @@ const Partner = require("../models/partnerModel.js");
 const catchAsyncErrors = require("./catchAsyncErrors");
 
 exports.isAuthenticated = catchAsyncErrors(async (req, res, next) => {
-  const token = req.headers.authorization;
+  const { token } = req.query;
 
   if (!token || token === "undefined") {
     return res.status(401).json({
