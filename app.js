@@ -16,7 +16,7 @@ app.use(
 app.use(fileUpload());
 app.use(cookieParser());
 
-app.use(cors());
+app.use(cors({ origin: "https://makfront.netlify.app" }));
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Headers", "Content-Type");
 //   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -24,6 +24,9 @@ app.use(cors());
 // });
 
 //Router Imports
+app.use("/test", function (req, res, next) {
+  res.status(200).json ({status:"200 OK Backend is here."});
+});
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
 app.use("/api/v1/client", require("./routes/clientRoute.js"));
 app.use("/api/v1/common", require("./routes/commonRoute.js"));
