@@ -24,7 +24,7 @@ app.use(cors({ origin: "https://makfront.netlify.app" }));
 // });
 
 //Router Imports
-app.use("/test", function (req, res, next) {
+app.use("/t", function (req, res, next) {
   res.status(200).json ({status:"200 OK Backend is here."});
 });
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
