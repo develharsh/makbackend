@@ -39,6 +39,12 @@ export const signup = (name, email, phone, password) => async (dispatch) => {
           type: CLIENT_REGISTER_FAIL,
           payload: data.message,
         });
+    })
+    .catch((err) => {
+      dispatch({
+        type: CLIENT_REGISTER_FAIL,
+        payload: 'Please Try Again.',
+      });
     });
 };
 
@@ -70,6 +76,11 @@ export const login = (ID, password) => async (dispatch) => {
           type: CLIENT_LOGIN_FAIL,
           payload: data.message,
         });
+    }).catch((err)=>{
+      dispatch({
+        type: CLIENT_LOGIN_FAIL,
+        payload:"Please Try Again.",
+      });
     });
 };
 

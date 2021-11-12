@@ -15,16 +15,6 @@ app.use(
 app.use(fileUpload());
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Headers", "Origin, Content-Type");
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, HEAD, OPTIONS"
-  );
-  next();
-});
-
 //Router Imports
 app.use("/api/v1/team", require("./routes/teamRoute.js"));
 app.use("/api/v1/client", require("./routes/clientRoute.js"));

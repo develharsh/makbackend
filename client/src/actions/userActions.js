@@ -36,6 +36,9 @@ export const loadUser = () => async (dispatch) => {
         cookie.remove("token");
         dispatch({ type: LOAD_USER_FAIL });
       }
+    })
+    .catch((err) => {
+      dispatch({ type: LOAD_USER_FAIL });
     });
 };
 
