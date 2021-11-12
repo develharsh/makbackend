@@ -1,10 +1,8 @@
-import axios from "axios";
 import cookie from "react-cookies";
 import { API_URL } from "../config/keys";
 import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_FAIL,
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
   LOAD_USER_FAIL,
@@ -15,43 +13,48 @@ import { CLIENT_DETAILS, NO_CLIENT } from "../constants/clientConstants";
 
 // Load User
 export const loadUser = () => async (dispatch) => {
-  try {
-    dispatch({ type: LOAD_USER_REQUEST });
-    const config = { headers: { Authorization: cookie.load("token") } };
-    const { data } = await axios.get(
-      `${API_URL}/api/v1/common/profile`,
-      config
-    );
-    if (data.user.type === "client")
-      dispatch({
-        type: CLIENT_DETAILS,
-        payload: data.user,
-      });
-    dispatch({
-      type: LOAD_USER_SUCCESS,
+  dispatch({ type: LOAD_USER_REQUEST });
+  const config = {
+    method: "GET",
+    headers: { Authorization: cookie.load("token") },
+  };
+  await fetch(`${API_URL}/api/v1/common/profile`, config)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        if (data.user.type === "client")
+          dispatch({
+            type: CLIENT_DETAILS,
+            payload: data.user,
+          });
+        dispatch({
+          type: LOAD_USER_SUCCESS,
+        });
+      } else {
+        cookie.remove("token");
+        dispatch({ type: LOAD_USER_FAIL });
+      }
     });
-  } catch (error) {
-    cookie.remove("token");
-    dispatch({ type: LOAD_USER_FAIL });
-  }
 };
 
 export const logOut = () => async (dispatch) => {
-  try {
-    dispatch({ type: LOGOUT_REQUEST });
-    const config = { headers: { Authorization: cookie.load("token") } };
-    const { data } = await axios.get(`${API_URL}/api/v1/common/logout`, config);
-    cookie.remove("token");
-    dispatch({
-      type: LOGOUT_SUCCESS,
-    });
-    if (data.type === "client")
+  dispatch({ type: LOGOUT_REQUEST });
+  const config = {
+    method: "GET",
+    headers: { Authorization: cookie.load("token") },
+  };
+  await fetch(`${API_URL}/api/v1/common/logout`, config)
+    .then((response) => response.json())
+    .then((data) => {
+      cookie.remove("token");
       dispatch({
-        type: NO_CLIENT,
+        type: LOGOUT_SUCCESS,
       });
-  } catch (error) {
-    dispatch({ type: LOGOUT_FAIL });
-  }
+      if (data.type === "client")
+        dispatch({
+          type: NO_CLIENT,
+        });
+    });
 };
 
 export const clearErrors = () => async (dispatch) => {

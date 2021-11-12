@@ -1,4 +1,3 @@
-import axios from "axios";
 import cookie from "react-cookies";
 import { API_URL } from "../config/keys";
 import {
@@ -14,57 +13,64 @@ import {
 import { LOAD_USER_SUCCESS } from "../constants/userConstants";
 
 export const signup = (name, email, phone, password) => async (dispatch) => {
-  try {
-    dispatch({ type: CLIENT_REGISTER_REQUEST });
+  dispatch({ type: CLIENT_REGISTER_REQUEST });
+  const config = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, email, phone, password }),
+  };
 
-    const config = { headers: { "Content-Type": "application/json" } };
-
-    const { data } = await axios.post(
-      `${API_URL}/api/v1/client/signup`,
-      { name, email, phone, password },
-      config
-    );
-    dispatch({
-      type: LOAD_USER_SUCCESS,
+  await fetch(`${API_URL}/api/v1/client/signup`, config)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        dispatch({
+          type: LOAD_USER_SUCCESS,
+        });
+        dispatch({
+          type: CLIENT_REGISTER_SUCCESS,
+          payload: { client: data.user, message: "Registered Successfully." },
+        });
+        cookie.save("token", data.token);
+      } else
+        dispatch({
+          type: CLIENT_REGISTER_FAIL,
+          payload: data.message,
+        });
     });
-    dispatch({
-      type: CLIENT_REGISTER_SUCCESS,
-      payload: { client: data.user, message: "Registered Successfully." },
-    });
-    cookie.save("token", data.token);
-  } catch (error) {
-    dispatch({
-      type: CLIENT_REGISTER_FAIL,
-      payload: error.response.data.message,
-    });
-  }
 };
 
 export const login = (ID, password) => async (dispatch) => {
-  try {
-    dispatch({ type: CLIENT_LOGIN_REQUEST });
+  dispatch({ type: CLIENT_LOGIN_REQUEST });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+  const config = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ID, password }),
+  };
 
-    const { data } = await axios.post(
-      `${API_URL}/api/v1/client/login`,
-      { ID, password },
-      config
-    );
-    dispatch({
-      type: LOAD_USER_SUCCESS,
+  await fetch(`${API_URL}/api/v1/client/login`, config)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        dispatch({
+          type: LOAD_USER_SUCCESS,
+        });
+        dispatch({
+          type: CLIENT_LOGIN_SUCCESS,
+          payload: { client: data.user, message: "Logged In." },
+        });
+        cookie.save("token", data.token);
+      } else
+        dispatch({
+          type: CLIENT_LOGIN_FAIL,
+          payload: data.message,
+        });
     });
-    dispatch({
-      type: CLIENT_LOGIN_SUCCESS,
-      payload: { client: data.user, message: "Logged In." },
-    });
-    cookie.save("token", data.token);
-  } catch (error) {
-    dispatch({
-      type: CLIENT_LOGIN_FAIL,
-      payload: error.response.data.message,
-    });
-  }
 };
 
 export const clearErrors = () => async (dispatch) => {

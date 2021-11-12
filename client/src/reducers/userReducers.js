@@ -1,7 +1,6 @@
 import {
     LOGOUT_REQUEST,
     LOGOUT_SUCCESS,
-    LOGOUT_FAIL,
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAIL,
@@ -33,9 +32,6 @@ import {
           loading: false,
           isAuthenticated: false
         };
-  
-      case LOGOUT_FAIL:
-        return { ...state, loading: false };
   
       case CLEAR_ERRORS:
         return {
