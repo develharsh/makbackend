@@ -1,0 +1,10 @@
+.mainDiv {
+    display: flex;
+    justify-content: center;
+  }
+  .formControl {
+    width: 300px;
+  }
+  .input {
+    margin: 0px 0px 20px 0px;
+  }
