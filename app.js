@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 require("dotenv").config({ path: "config/.env" });
 //const cloudinary = require("cloudinary");
-//const path = require("path");
+const path = require("path");
 
 app.use(express.json());
 app.use(
@@ -22,12 +22,12 @@ app.use("/api/v1/common", require("./routes/commonRoute.js"));
 app.use("/api/v1/service", require("./routes/serviceRoute.js"));
 app.use("/api/v1/partner", require("./routes/partnerRoute.js"));
 
-// //Frontend
-// app.use(express.static(path.join(__dirname, "./client/build")));
+//Frontend
+app.use(express.static(path.join(__dirname, "./client/build")));
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
+});
 
 require("./utils/connectDB");
 
