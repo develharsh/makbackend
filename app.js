@@ -16,8 +16,15 @@ app.use(fileUpload());
 app.use(cookieParser());
 
 app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, Content-Type, Accept, Authorization"
+  );
   res.header("Access-Control-Allow-Origin", "https://myui-kappa.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, HEAD, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, HEAD, OPTIONS"
+  );
   next();
 });
 
