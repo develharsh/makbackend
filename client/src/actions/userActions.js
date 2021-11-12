@@ -17,7 +17,7 @@ export const loadUser = () => async (dispatch) => {
     method: "GET",
   };
   await fetch(
-    `/api/v1/common/profile?token=${cookie.load("token")}`,
+    `https://makbackend.herokuapp.com/api/v1/common/profile?token=${cookie.load("token")}`,
     config
   )
     .then((response) => response.json())
